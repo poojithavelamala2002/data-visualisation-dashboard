@@ -1,0 +1,51 @@
+.dashboard-container {
+  padding: 20px;
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filters-box {
+  margin-bottom: 25px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.chart-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.table-box {
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
