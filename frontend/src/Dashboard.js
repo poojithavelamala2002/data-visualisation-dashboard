@@ -7,8 +7,8 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
-  const [filters, setFilters] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [filters, setFilters] = useState({}); // ✅ FIXED
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const fetchData = async () => {
@@ -17,11 +17,8 @@ const Dashboard = () => {
       setError("");
 
       const cleanFilters = {};
-
       Object.keys(filters).forEach((key) => {
-        if (filters[key]) {
-          cleanFilters[key] = filters[key];
-        }
+        if (filters[key]) cleanFilters[key] = filters[key];
       });
 
       const query = new URLSearchParams(cleanFilters).toString();
@@ -30,14 +27,10 @@ const Dashboard = () => {
         `${process.env.REACT_APP_API_URL}/api/data?${query}`
       );
 
-      if (Array.isArray(response.data)) {
-        setData(response.data);
-      } else {
-        setData([]);
-      }
+      setData(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
       console.error("API Error:", err);
-      setError("Failed to load data. Please try again.");
+      setError("Failed to load data");
       setData([]);
     } finally {
       setLoading(false);
@@ -46,95 +39,68 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line
   }, [filters]);
+
+  // ✅ ALWAYS SAFE
+  const safeData = Array.isArray(data) ? data : [];
+
+  const avgIntensity =
+    safeData.length > 0
+      ? (
+          safeData.reduce((sum, i) => sum + (Number(i.intensity) || 0), 0) /
+          safeData.length
+        ).toFixed(2)
+      : "0.00";
+
+  const avgLikelihood =
+    safeData.length > 0
+      ? (
+          safeData.reduce((sum, i) => sum + (Number(i.likelihood) || 0), 0) /
+          safeData.length
+        ).toFixed(2)
+      : "0.00";
+
+  if (loading) return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+  if (error) return <h2 style={{ textAlign: "center" }}>{error}</h2>;
 
   return (
     <div className="dashboard-container">
       <h1 className="title">Data Visualization Dashboard</h1>
 
-      {/* Filters */}
       <div className="filters-box">
         <Filters filters={filters} setFilters={setFilters} />
       </div>
 
-      {/* Loading */}
-      {loading && <p style={{ textAlign: "center" }}>Loading data...</p>}
-
-      {/* Error */}
-      {error && (
-        <p style={{ color: "red", textAlign: "center" }}>{error}</p>
-      )}
-
-      {/* Cards */}
-      {!loading && !error && (
-        <div className="cards-grid">
-          <div className="card">
-            <h4>Total Records</h4>
-            <p>{data.length}</p>
-          </div>
-
-          <div className="card">
-            <h4>Avg Intensity</h4>
-            <p>
-              {data.length > 0
-                ? (
-                    data.reduce(
-                      (sum, item) => sum + (Number(item.intensity) || 0),
-                      0
-                    ) / data.length
-                  ).toFixed(2)
-                : "0.00"}
-            </p>
-          </div>
-
-          <div className="card">
-            <h4>Avg Likelihood</h4>
-            <p>
-              {data.length > 0
-                ? (
-                    data.reduce(
-                      (sum, item) => sum + (Number(item.likelihood) || 0),
-                      0
-                    ) / data.length
-                  ).toFixed(2)
-                : "0.00"}
-            </p>
-          </div>
+      <div className="cards-grid">
+        <div className="card">
+          <h4>Total Records</h4>
+          <p>{safeData.length}</p>
         </div>
-      )}
 
-      {/* Charts */}
-      {!loading && !error && data.length > 0 && (
-        <div className="charts-grid">
-          <div className="chart-box">
-            <Charts data={data} chartType="intensity" />
-          </div>
-          <div className="chart-box">
-            <Charts data={data} chartType="likelihood" />
-          </div>
-          <div className="chart-box">
-            <Charts data={data} chartType="region" />
-          </div>
-          <div className="chart-box">
-            <Charts data={data} chartType="relevance" />
-          </div>
+        <div className="card">
+          <h4>Avg Intensity</h4>
+          <p>{avgIntensity}</p>
         </div>
-      )}
 
-      {/* Table */}
-      {!loading && !error && data.length > 0 && (
-        <div className="table-box">
-          <h2>Data Table</h2>
-          <DataTable data={data} />
+        <div className="card">
+          <h4>Avg Likelihood</h4>
+          <p>{avgLikelihood}</p>
         </div>
-      )}
+      </div>
+
+      <div className="charts-grid">
+        <Charts data={safeData} chartType="intensity" />
+        <Charts data={safeData} chartType="likelihood" />
+        <Charts data={safeData} chartType="region" />
+        <Charts data={safeData} chartType="relevance" />
+      </div>
+
+      <div className="table-box">
+        <h2>Data Table</h2>
+        <DataTable data={safeData} />
+      </div>
     </div>
   );
 };
 
 export default Dashboard;
-
-
-
-
