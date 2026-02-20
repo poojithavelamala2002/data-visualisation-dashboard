@@ -1,7 +1,4 @@
 // src/charts.js
-// src/charts.js
-
-
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import {
@@ -16,7 +13,6 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const Charts = ({ data = [], chartType }) => {
-  // Safety
   if (!Array.isArray(data) || data.length === 0) {
     return <p style={{ textAlign: "center" }}>No data available</p>;
   }
@@ -28,7 +24,7 @@ const Charts = ({ data = [], chartType }) => {
     case "intensity":
     case "likelihood":
     case "relevance":
-      labels = data.map((_, index) => `Record ${index + 1}`);
+      labels = data.map((_, index) => `R${index + 1}`);
       values = data.map((item) => item[chartType] || 0);
       break;
 
@@ -53,15 +49,29 @@ const Charts = ({ data = [], chartType }) => {
         label: chartType.toUpperCase(),
         data: values,
         backgroundColor: "rgba(54, 162, 235, 0.6)",
+        borderRadius: 6,
       },
     ],
   };
 
-  return <Bar data={chartData} />;
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false, // 🔥 IMPORTANT
+    plugins: {
+      legend: { display: false },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  return (
+    <div style={{ height: "100%" }}>
+      <Bar data={chartData} options={options} />
+    </div>
+  );
 };
 
-
-
-
- export default Charts;
-
+export default Charts;

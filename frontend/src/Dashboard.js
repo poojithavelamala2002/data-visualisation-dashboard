@@ -91,11 +91,26 @@ const Dashboard = () => {
       </div>
 
       <div className="charts-grid">
-        <Charts data={safeData} chartType="intensity" />
-        <Charts data={safeData} chartType="likelihood" />
-        <Charts data={safeData} chartType="region" />
-        <Charts data={safeData} chartType="relevance" />
-      </div>
+  <div className="chart-box">
+    <div className="chart-title">Intensity</div>
+    <Charts data={safeData} chartType="intensity" />
+  </div>
+
+  <div className="chart-box">
+    <div className="chart-title">Likelihood</div>
+    <Charts data={safeData} chartType="likelihood" />
+  </div>
+
+  <div className="chart-box">
+    <div className="chart-title">Region</div>
+    <Charts data={safeData} chartType="region" />
+  </div>
+
+  <div className="chart-box">
+    <div className="chart-title">Relevance</div>
+    <Charts data={safeData} chartType="relevance" />
+  </div>
+</div>
 
       <div className="table-box">
         <h2>Data Table</h2>
