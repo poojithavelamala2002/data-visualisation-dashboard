@@ -18,7 +18,7 @@ const DataTable = ({ data }) => {
           <tr key={i}>
             <td>{item.country || "-"}</td>
             <td>{item.topic || "-"}</td>
-            <td>{item.published?.slice(0, 4) || "-"}</td>
+            <td>{item.year || item.end_year || "-"}</td>
             <td>{item.intensity ?? 0}</td>
             <td>{item.likelihood ?? 0}</td>
           </tr>
