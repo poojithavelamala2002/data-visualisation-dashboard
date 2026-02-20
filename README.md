@@ -1,102 +1,152 @@
-# Visualization Dashboard - Test Assignment
 
-## Overview
-This project is a **Data Visualization Dashboard** built to analyze and visualize insights from the provided JSON data (`jsondata.json`). The dashboard provides interactive charts, graphs, and filters to explore key variables such as **Intensity, Likelihood, Relevance, Year, Country, Topics, Region, and City**. The goal is to help users easily interpret trends and patterns in the dataset.
+# 📊 Data Visualization Dashboard (MERN Stack)
 
----
+A full-stack data visualization dashboard built using the MERN stack that allows users to explore, filter, and analyze large datasets through interactive charts and tables.
 
-## Features
+This project demonstrates real-world full-stack skills including API design, MongoDB querying, React hooks, and data visualization.
 
-### Data & Backend
-- JSON data (`jsondata.json`) is imported into a **MongoDB** database.
-- A **RESTful API** is developed using **Node.js / Python (FastAPI / Django)** to fetch data from MongoDB.
-- Data retrieval endpoints support dynamic filtering for enhanced interactivity.
+# 🚀 Features
 
-### Frontend & Visualization
-- Built with **React.js / Next.js / Angular / JavaScript** (choose as per your stack).
-- Interactive charts and graphs created using **D3.js**, **Chart.js**, or **Plotly.js**.
-- Filters include:
-  - End Year
-  - Topics
-  - Sector
-  - Region
-  - PEST
-  - Source
-  - SWOT
-  - Country
-  - City
-  - Additional filters based on dataset for enhanced analysis
-- Users can interact with charts to explore data dynamically.
+1. 📈 Interactive charts (Intensity, Likelihood, Relevance, Region)
 
----
+2. 🔍 Dynamic filtering by country, sector, topic, and region
 
-## Key Variables Visualized
-- **Intensity** – Measure of impact or significance.
-- **Likelihood** – Probability of occurrence.
-- **Relevance** – Importance to the sector/topic.
-- **Year** – Timeline of events/data points.
-- **Country / Region / City** – Geographic insights.
-- **Topics / Sector / PEST / SWOT / Source** – Contextual and domain-specific insights.
+3. 📋 Tabular data view with pagination-ready structure
 
----
+4. ⚡ Efficient backend filtering using MongoDB queries
 
-## Installation
+5. 🛡 Safe React state handling (no crashes on empty data)
 
-### Backend
-1. Clone the repository:
-```bash
-git clone <repo-url>
-cd visualization-dashboard/backend
-```
-2. Install dependencies:
-```
-npm install 
-```
-3. Start the server:
-```
-npm start
-```
+6. 🌐 Environment-based API configuration
+
+# 🛠 Tech Stack
 ## Frontend
 
-1. Navigate to the frontend folder:
+React.js
+
+Axios
+
+Chart.js
+
+React Hooks (useState, useEffect, useCallback)
+
+CSS (custom styling)
+
+## Backend
+
+Node.js
+
+Express.js
+
+MongoDB
+
+Mongoose
+
+CORS
+
+dotenv
+
+# 📁 Project Structure
 ```
-cd ../frontend
+├── backend
+│   ├── model.js
+│   ├── routes.js
+│   ├── server.js
+│   ├── jsondata.json
+│   └── .env
+│
+├── frontend
+│   ├── src
+│   │   ├── Dashboard.js
+│   │   ├── Charts.js
+│   │   ├── DataTable.js
+│   │   ├── Filters.js
+│   │   └── App.js
+│   └── .env
+│
+└── README.md
 ```
 
-2. Install dependencies:
-```
+# ⚙️ Setup Instructions
+## 1️⃣ Clone the Repository
+git clone https://github.com/your-username/data-visualization-dashboard.git
+cd data-visualization-dashboard
+## 2️⃣ Backend Setup
+cd backend
 npm install
-```
 
-3. Start the frontend server:
+### Create a .env file in backend/:
+
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+
+### Start backend server:
+
+node server.js
+## 3️⃣ Insert Data into MongoDB (Required)
+
+### Open browser and visit:
 ```
+http://localhost:5000/api/insert-data
+```
+You should see:
+
+Data inserted successfully!
+## 4️⃣ Frontend Setup
+```
+cd frontend
+npm install
 npm start
 ```
+### Create a .env file in frontend/:
 
----
-## Usage
+REACT_APP_API_URL=http://localhost:5000
 
-- Open the frontend application in the browser (usually at http://localhost:3000).
+## 🧪 API Endpoints
+### Method	Endpoint	Description
+GET	/api/insert-data	Insert JSON data into MongoDB
+GET	/api/data	Fetch filtered dashboard data
+GET	/api/filters	Get filter dropdown values
 
-- Use the filters to select Year, Topics, Sector, Region, Country, City, and other dimensions.
+## 📸 Screenshots
+## 📸 Screenshots
 
-- Explore interactive charts to gain insights from the data.
+### Dashboard Overview
+![Dashboard Overview](screenshots/datatable.png)
 
----
+### Filters & KPIs
+![Filters](screenshots/filters.png)
 
-## Technologies Used
+### Charts Visualization
+![Charts](screenshots/chart(1).png)
+![Charts](screenshots/chart(2).png)
 
-Frontend: React.js 
 
-Backend: Node.js / Express 
+## 🧠 Key Learnings
 
-Database: MongoDB
+Handling API response mismatches between frontend and backend
 
-Visualization: Chart.js
+Optimizing React hooks dependency management
 
-Others: Axios / Fetch API for data fetching
+Designing clean REST APIs with Express and MongoDB
 
----
-## License
+Debugging real-world full-stack data flow issues
 
-This project is for educational purposes only.
+## 🚀 Future Improvements
+
+Pagination & infinite scrolling
+
+Dynamic filters from backend
+
+Caching and debounced API calls
+
+Authentication & role-based access
+
+Deployment with Docker
+
+## 👩‍💻 Author
+
+Poojitha Velamala
+Aspiring Software Engineer | MERN Stack Developer
+
+📌 Focused on building scalable, real-world web applications
