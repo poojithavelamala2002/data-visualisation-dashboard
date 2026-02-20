@@ -27,7 +27,8 @@ const Dashboard = () => {
         `${process.env.REACT_APP_API_URL}/api/data?${query}`
       );
 
-      setData(Array.isArray(response.data) ? response.data : []);
+      const apiData = response.data?.data;
+       setData(Array.isArray(apiData) ? apiData : []);
     } catch (err) {
       console.error("API Error:", err);
       setError("Failed to load data");
