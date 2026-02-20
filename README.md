@@ -1,4 +1,3 @@
-
 # 📊 Data Visualization Dashboard (MERN Stack)
 
 A full-stack data visualization dashboard built using the MERN stack that allows users to explore, filter, and analyze large datasets through interactive charts and tables.
@@ -69,29 +68,33 @@ dotenv
 
 # ⚙️ Setup Instructions
 ## 1️⃣ Clone the Repository
+```
 git clone https://github.com/your-username/data-visualization-dashboard.git
 cd data-visualization-dashboard
+```
 ## 2️⃣ Backend Setup
+```
 cd backend
 npm install
-
+```
 ### Create a .env file in backend/:
-
+```
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
-
+```
 ### Start backend server:
-
+```
 node server.js
+```
 ## 3️⃣ Insert Data into MongoDB (Required)
 
 ### Open browser and visit:
 ```
 http://localhost:5000/api/insert-data
 ```
-You should see:
-
+### You should see:
 Data inserted successfully!
+
 ## 4️⃣ Frontend Setup
 ```
 cd frontend
@@ -100,15 +103,15 @@ npm start
 ```
 ### Create a .env file in frontend/:
 
+```
 REACT_APP_API_URL=http://localhost:5000
-
+```
 ## 🧪 API Endpoints
 ### Method	Endpoint	Description
-GET	/api/insert-data	Insert JSON data into MongoDB
-GET	/api/data	Fetch filtered dashboard data
-GET	/api/filters	Get filter dropdown values
+- GET	/api/insert-data	Insert JSON data into MongoDB
+- GET	/api/data	Fetch filtered dashboard data
+- GET	/api/filters	Get filter dropdown values
 
-## 📸 Screenshots
 ## 📸 Screenshots
 
 ### Dashboard Overview
@@ -119,30 +122,31 @@ GET	/api/filters	Get filter dropdown values
 
 ### Charts Visualization
 ![Charts](screenshots/chart(1).png)
+
 ![Charts](screenshots/chart(2).png)
 
 
 ## 🧠 Key Learnings
 
-Handling API response mismatches between frontend and backend
+- Handling API response mismatches between frontend and backend
 
-Optimizing React hooks dependency management
+- Optimizing React hooks dependency management
 
-Designing clean REST APIs with Express and MongoDB
+- Designing clean REST APIs with Express and MongoDB
 
-Debugging real-world full-stack data flow issues
+- Debugging real-world full-stack data flow issues
 
 ## 🚀 Future Improvements
 
-Pagination & infinite scrolling
+- Pagination & infinite scrolling
 
-Dynamic filters from backend
+- Dynamic filters from backend
 
-Caching and debounced API calls
+- Caching and debounced API calls
 
-Authentication & role-based access
+- Authentication & role-based access
 
-Deployment with Docker
+- Deployment with Docker
 
 ## 👩‍💻 Author
 
