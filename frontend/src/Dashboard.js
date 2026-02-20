@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Filters from "./Filters";
 import Charts from "./Charts";
@@ -7,11 +7,12 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
-  const [filters, setFilters] = useState({}); // ✅ FIXED
+  const [filters, setFilters] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const fetchData = async () => {
+  // ✅ Memoized fetch function (ESLint safe)
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -27,8 +28,7 @@ const Dashboard = () => {
         `${process.env.REACT_APP_API_URL}/api/data?${query}`
       );
 
-      const apiData = response.data?.data;
-       setData(Array.isArray(apiData) ? apiData : []);
+      setData(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
       console.error("API Error:", err);
       setError("Failed to load data");
@@ -36,13 +36,14 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchData();
   }, [filters]);
 
-  // ✅ ALWAYS SAFE
+  // ✅ Correct dependency
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  // ✅ Safety check
   const safeData = Array.isArray(data) ? data : [];
 
   const avgIntensity =
